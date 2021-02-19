@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block menu %}kategori{% endblock %}
+{% block content %}
+
+<h3>{{title}}Kategori</h3>
+<hr>
+<form method="post">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="form-group row">
+				<label class="col-md-2">Nama Kategori</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" name="nama" value="{{kategori_id.nama}}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-md-2"></label>
+				<div class="col-md-10">
+					<input type="hidden" name="id" value="{{kategori_id.id}}">
+					<button type="submit" class="btn btn-success" name="save" value="1">Simpan</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+{% endblock %}

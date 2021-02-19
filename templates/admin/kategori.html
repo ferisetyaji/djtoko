@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
-{% block menu %}user{% endblock %}
-{% block tablebtn %}<a href="{% url 'tambah_user' %}" class="btn btn-success" style="float:left;margin-right:4px;">Tambah</a>{% endblock %}
+{% block menu %}kategori{% endblock %}
+{% block tablebtn %}<a href="{% url 'tambah_kategori' %}" class="btn btn-success" style="float:left;margin-right:4px;">Tambah</a>{% endblock %}
 {% block content %}
 
-<h3>User</h3>
+<h3>kategori</h3>
 <hr>
 <form method="post">
 	<table class="table table-bordered" id="myTable">
 		<thead>
 			<tr>
 				<th class="tb-no">No</th>
-				<th>Username</th>
+				<th>kategori</th>
 				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody>
-		{% for item in user %}
+		{% for item in kategori %}
 			<tr>
 				<td>{{ forloop.counter }}</td>
-				<td>{{ item.username }}</td>
+				<td>{{ item.nama }}</td>
 				<td>
-					<a href="{% url 'edit_user' item.id %}" class="btn btn-primary btn-xs">Edit</a>
+					<a href="{% url 'edit_kategori' item.id %}" class="btn btn-primary btn-xs">Edit</a>
 					<button type="submit" class="btn btn-danger btn-xs" name="del" value="{{ item.id }}">Hapus</button>
 				</td>
 			</tr>
