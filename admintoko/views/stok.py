@@ -1,8 +1,4 @@
 import datetime
-import tempfile
-import shutil
-
-FILE_UPLOAD_DIR = 'static/img'
 
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
@@ -26,10 +22,13 @@ def tambah_stok(request):
 
 	if request.method == 'POST':
 
-		myfile = request.FILES['file']
-		
-		fs = FileSystemStorage()
-		filename = fs.save(myfile.name, myfile)
+		filename = ''
+
+		if 'file' in request.FILES:
+			myfile = request.FILES['file']
+			
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
 
 		q = Stok.objects.create(
 				nama = request.POST['nama'],
@@ -37,7 +36,8 @@ def tambah_stok(request):
 				harga = isset(request.POST['harga']),
 				kategori = request.POST['kategori'],
 				gambar = filename,
-				tanggal = datetime.datetime.now()
+				tanggal = datetime.datetime.now(),
+				jumlah_stok = isset(request.POST['jumlah'])
 			)
 
 		q.save
@@ -51,28 +51,29 @@ def edit_stok(request, stok_id):
 
 	if request.method == 'POST':
 
-		q = Stok.objects.filter(id = stok_id).update(
+		if 'file' in request.FILES:
+			myfile = request.FILES['file']
+			
+			fs = FileSystemStorage()
+			filename = fs.save(myfile.name, myfile)
+			Stok.objects.filter(id = stok_id).update(gambar = filename)
+
+		Stok.objects.filter(id = stok_id).update(
 				nama = request.POST['nama'],
 				deskripsi = request.POST['deskripsi'],
 				harga = isset(request.POST['harga']),
 				kategori = request.POST['kategori'],
-				jumlah_stok = request.POST['stok'],
+				jumlah_stok = isset(request.POST['jumlah'])
 			)
 
 		return redirect('stok')
 
 	data = {
 		'title' : 'Edit ',
-		'user' : data_stok
+		'stok_id' : data_stok
 	}
 
-	return render(request, ' admin/stok_form.html', data)
-
-def handle_uploaded_file(source):
-    fd, filepath = tempfile.mkstemp(prefix=source.name, dir=FILE_UPLOAD_DIR)
-    with open(filepath, 'wb') as dest:
-        shutil.copyfileobj(source, dest)
-    return filepath
+	return render(request, 'admin/stok_form.html', data)
 
 
 def isset(field):

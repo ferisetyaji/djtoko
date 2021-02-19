@@ -11,6 +11,7 @@ class Stok(models.Model):
 	kategori = models.CharField(max_length=20)
 	gambar = models.CharField(max_length=50)
 	tanggal = models.DateTimeField()
+	jumlah_stok = models.IntegerField()
 
 class Kategori(models.Model):
 	nama = models.CharField(max_length=100)
