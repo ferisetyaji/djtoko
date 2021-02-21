@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from ..models import Stok
+from ..models import Stok, Kategori
 
 def stok(request):
 
@@ -43,7 +43,16 @@ def tambah_stok(request):
 		q.save
 		return redirect('stok')
 
-	return render(request, 'admin/stok_form.html', {'title': 'Tambah '})
+	data_kategori = Kategori.objects.all()
+
+	data = {
+
+		'title': 'Tambah ',
+		'kategori' : data_kategori
+
+	}
+
+	return render(request, 'admin/stok_form.html', data)
 
 def edit_stok(request, stok_id):
 
@@ -68,9 +77,12 @@ def edit_stok(request, stok_id):
 
 		return redirect('stok')
 
+	data_kategori = Kategori.objects.all()
+
 	data = {
 		'title' : 'Edit ',
-		'stok_id' : data_stok
+		'stok_id' : data_stok,
+		'kategori' : data_kategori
 	}
 
 	return render(request, 'admin/stok_form.html', data)

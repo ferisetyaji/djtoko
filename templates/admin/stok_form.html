@@ -28,7 +28,12 @@
 			<div class="form-group row">
 				<label class="col-md-4">Kategori</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" name="kategori">
+					<select class="form-control" name="kategori">
+						<option value="">- Pilih Kategori -</option>
+						{% for item in kategori %}
+						<option>{{item.nama}}</option>
+						{% endfor %}
+					</select>
 				</div>
 			</div>
 			<div class="form-group row">
