@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}stok{% endblock %}
+{% block menu %}Stok{% endblock %}
+{% block tablebtn %}<a href="{% url 'tambah_stok' %}" class="btn btn-success" style="float:left;margin-right:4px;">Tambah</a>{% endblock %}
+{% block content %}
+
+<h3>Stok</h3>
+<hr>
+<form method="post">
+	<table class="table table-bordered" id="myTable">
+		<thead>
+			<tr>
+				<th class="tb-no">No</th>
+				<th>Nama Pemesan</th>
+				<th>Jumlah Bayar</th>
+				<th>Total Bayar</th>
+				<th>Stok</th>
+				<th>Status Bayar</th>
+				<th>Status Pemesanan</th>
+				<th>Aksi</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for item in pesanan %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ item.nama_pemesan }}</td>
+				<td>{{ item.jumlah_bayar }}</td>
+				<td>{{ item.total_bayar }}</td>
+				<td>{{ item.stok }}</td>
+				<td>{{ item.status_bayar }}</td>
+				<td>{{ item.status_pesanan }}</td>
+				<td>
+					<a href="{% url 'edit_stok' item.id %}" class="btn btn-primary btn-xs">Edit</a>
+					<button type="submit" class="btn btn-danger btn-xs" name="del" value="{{ item.id }}">Hapus</button>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</form>
+
+{% endblock content %}

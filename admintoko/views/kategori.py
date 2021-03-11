@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.views.generic.base import TemplateView
 
 from ..models import Kategori
 

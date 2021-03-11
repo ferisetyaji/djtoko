@@ -1,7 +1,6 @@
 import datetime
 
 from django.shortcuts import render, redirect
-from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
