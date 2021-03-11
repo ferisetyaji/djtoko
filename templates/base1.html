@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" style="position:relative;min-height:100%;background-color:#fff">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DJTOKO - {% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" href="{% static '/css/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/css/fontawesome/css/all.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+        <link rel="stylesheet" href="{% static '/css/main.css' %}">
+        <link rel="stylesheet" href="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/css/public.css">
+    </head>
+    <body style="background-color:#fff">
+        <div class="top-bar">
+            <div class="container">
+                <a href="" class="brand">DJTOKO</a>
+                <div class="top-tool">
+                    <a href="" class="tool-menu"><i class="fas fa-heart"></i></a>
+                    <a href="" class="tool-menu"><i class="fas fa-shopping-cart"></i></a>
+                    <input type="text" class="form-search">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        {% block content %}{% endblock content %}
+        <footer>
+            <p class="text-footer">&copy;Copyright <span class="tgl-copy"></span> by Source box Team</p>
+        </footer>
+        <script type="text/javascript" src="{% static '/js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/bootstrap/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/dataTables.min.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+        <script type="text/javascript" src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/js/public.js"></script>
+    </body>
+</html>
