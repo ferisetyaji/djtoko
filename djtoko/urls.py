@@ -24,5 +24,7 @@ urlpatterns = [
     path('admin/', include('admintoko.urls')),
     path('', views.index, name='home'),
     re_path(r'^produk/$', views.produk, name='produk'),
-    re_path(r'^produk/(?P<produk_id>\w+)$', views.produk, name='produk')
+    re_path(r'^produk/(?P<produk_id>\w+)$', views.produk, name='produk'),
+    re_path(r'^beli/$', views.beli, name='beli'),
+    re_path(r'^beli/(?P<produk_id>\w+)$', views.beli, name='beli')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

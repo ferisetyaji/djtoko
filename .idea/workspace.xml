@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="230666e9-03df-44e9-a4fa-93dfd39cb256" name="Default Changelist" comment="add front page" />
+    <list default="true" id="230666e9-03df-44e9-a4fa-93dfd39cb256" name="Default Changelist" comment="add front page">
+      <change afterPath="$PROJECT_DIR$/templates/public/beli.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djtoko/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djtoko/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djtoko/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djtoko/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/public.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/public.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/public/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/public/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/public/produk.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/public/produk.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,6 +39,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dp\djtoko\djtoko" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -45,7 +60,28 @@
       <option name="project" value="LOCAL" />
       <updated>1615491813877</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add front page">
+      <created>1615491977942</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615491977942</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add front page">
+      <created>1615492045764</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615492045764</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add front page">
+      <created>1615492074897</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615492074897</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -61,6 +97,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add front page" />

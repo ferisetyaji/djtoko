@@ -29,10 +29,9 @@
 					<div class="produk-deskripsi">{{stok.deskripsi}}</div>
 				</div>
 				<div class="form-group"><i>Masih tersedia sekitar {{stok.jumlah_stok}} stok</i></div>
-				</div>
 			</div>
 			<div class="form-group produk-btn">
-				<a href="beli/" class="btn btn-produk btn-beli">Beli</a>
+				<a href="{{request.scheme}}://{{request.META.HTTP_HOST}}/beli/{{stok.id}}" class="btn btn-produk btn-beli">Beli</a>
 				<button type="button" class="btn btn-produk btn-keranjang">Tambah Keranjang</button>
 			</div>
 		</div>

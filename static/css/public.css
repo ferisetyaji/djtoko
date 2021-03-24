@@ -97,3 +97,22 @@ footer{
     background-color:#f57c00;
     box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.1);
 }
+
+.beli-harga{
+    color:orange;
+    margin-bottom:5px
+}
+.plus-qty, .nilai-qty, .min-qty{
+    float:left;
+}
+.plus-qty, .min-qty{
+    font-size:0.8em;
+    padding:4px 10px 2px;
+    border: 1px solid #ddd;
+    cursor:pointer;
+    border-radius: 5px;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0,0,0,0.1);
+}
+.nilai-qty{
+    padding:3px 10px;
+}
