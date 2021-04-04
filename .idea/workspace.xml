@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="230666e9-03df-44e9-a4fa-93dfd39cb256" name="Default Changelist" comment="add front page">
-      <change afterPath="$PROJECT_DIR$/templates/public/beli.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djtoko/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djtoko/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djtoko/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djtoko/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/public.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/public.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/public.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/public.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/public/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/public/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/public/produk.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/public/produk.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
