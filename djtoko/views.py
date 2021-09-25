@@ -1,6 +1,7 @@
 import http.client
 import urllib.parse
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from admintoko.models import Kategori, Stok
 
 def index(request): 
