@@ -23,6 +23,8 @@ from . import views
 urlpatterns = [
     path('admin/', include('admintoko.urls')),
     path('', views.index, name='home'),
+    path('get_data', views.get_data),
+    path('get_api', views.get_api),
     re_path(r'^produk/$', views.produk, name='produk'),
     re_path(r'^produk/(?P<produk_id>\w+)$', views.produk, name='produk'),
     re_path(r'^beli/$', views.beli, name='beli'),
