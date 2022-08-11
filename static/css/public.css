@@ -11,8 +11,14 @@ img{
 body{
     margin-bottom: 60px;
 }
-.btn, .form-control{
-    border-radius: 5px;
+.bd-left{
+    float:left;
+}
+.bd-right{
+    float:right;
+}
+.btn, .form-control, .modal{
+    border-radius: 4px;
 }
 .top-bar{
     position: fixed;
@@ -115,4 +121,8 @@ footer{
 }
 .nilai-qty{
     padding:3px 10px;
+}
+.close{
+    margin-top: 0;
+    opacity: unset;
 }

@@ -9,7 +9,7 @@
 			<a href="{% url 'produk' item.id %}">
 				<div class="stok-item">
 					<div class="stok-img">
-						<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/indomie.png">
+						<img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/media/{{item.gambar}}">
 					</div>
 					<div class="stok-detail">
 						<div class="stok-nama">{{item.nama}}</div>

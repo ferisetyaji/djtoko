@@ -1,7 +1,10 @@
 import http.client
 import urllib.parse
+import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+
 from admintoko.models import Kategori, Stok
 
 def index(request): 
@@ -40,19 +43,22 @@ def beli(request, produk_id = ''):
 def get_data(request):
 	address_data = urllib.parse.quote_plus(request.POST['address']);
 
-	conn = http.client.HTTPSConnection("nhf.finance")
+	conn = http.client.HTTPSConnection("nhf.financesadasdasd")
 	payload = 'address='+address_data
 	headers = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
 	}
 	conn.request("POST", "/data", payload, headers)
 	res = conn.getresponse()
+
+	status = res.status
 	data = res.read()
-	print(data.decode("utf-8"))
-	return HttpResponse(data.decode("utf-8"))
+	decod_res = json.loads(data)
+	data = json.dumps(decod_res)
+
+	return HttpResponse(data, status=status, content_type="text/json")
 
 def get_api(request):
-
 	value_data = urllib.parse.quote_plus(request.POST['value']);
 	type_data = urllib.parse.quote_plus(request.POST['type']);
 
@@ -61,8 +67,13 @@ def get_api(request):
 	headers = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
 	}
+
 	conn.request("POST", "/api", payload, headers)
 	res = conn.getresponse()
+
+	status = res.status;
 	data = res.read()
-	print(data.decode("utf-8"))
-	return HttpResponse(data.decode("utf-8"))
+	decod_res = json.loads(data)
+	data = json.dumps(decod_res)
+
+	return HttpResponse(data, status=status, content_type="text/json")

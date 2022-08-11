@@ -11,6 +11,8 @@
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
         <link rel="stylesheet" href="{% static '/css/main.css' %}">
         <link rel="stylesheet" href="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/css/public.css">
+        <script type="text/javascript" src="{% static '/js/vue.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/axios.min.js' %}"></script>
     </head>
     <body style="background-color:#fff">
         <div class="top-bar">
@@ -34,5 +36,21 @@
         <script type="text/javascript" src="{% static '/js/dataTables.min.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
         <script type="text/javascript" src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/js/public.js"></script>
+        
+        <script type="text/javascript">
+           var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }
+})
+            $('.btn-keranjang').click(function(){
+                console.log('ok');
+            });
+        </script>
     </body>
 </html>
