@@ -1,5 +1,6 @@
 .form-control, .mce-tinymce, .btn, .alert, .panel, .modal-content{
     border-radius: 4px;
+    box-shadow: 0 0.25rem 0.125rem 0 rgb(0 0 0 / 10%) !important;
 }
 
 .contents{
@@ -145,7 +146,7 @@
     background-color:#fff;
 }
 .submenu li a{color:#555 !important;}
-.submenu li a:hover{color:#fff176 !important;}
+.submenu li a:hover{color:#e74a3b !important;}
 .side-hr{
     clear:both;
     height:1px;
@@ -274,4 +275,12 @@
     border:1px solid #ddd;
     background-color:#ff7d66;
     box-shadow: 0 0.25rem 0.125rem 0 rgba(0,0,0,0.1);
+}
+.table-content{
+    padding: 15px 15px 30px;
+    margin-top: 30px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 0.25rem 0.125rem 0 rgb(0 0 0 / 10%);
 }

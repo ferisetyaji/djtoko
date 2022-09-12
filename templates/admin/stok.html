@@ -1,39 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}stok{% endblock %}
-{% block menu %}Stok{% endblock %}
+{% block menu %}stok{% endblock %}
 {% block tablebtn %}<a href="{% url 'tambah_stok' %}" class="btn btn-success" style="float:left;margin-right:4px;">Tambah</a>{% endblock %}
 {% block content %}
-
-<h3>Stok</h3>
-<hr>
-<form method="post">
-	<table class="table table-bordered" id="myTable">
-		<thead>
-			<tr>
-				<th class="tb-no">No</th>
-				<th>Nama Stok</th>
-				<th>Harga</th>
-				<th>Kategori</th>
-				<th>Jumlah Stok</th>
-				<th>Aksi</th>
-			</tr>
-		</thead>
-		<tbody>
-		{% for item in stok %}
-			<tr>
-				<td>{{ forloop.counter }}</td>
-				<td>{{ item.nama }}</td>
-				<td>{{ item.harga }}</td>
-				<td>{{ item.kategori }}</td>
-				<td>{{ item.jumlah_stok }}</td>
-				<td>
-					<a href="{% url 'edit_stok' item.id %}" class="btn btn-primary btn-xs">Edit</a>
-					<button type="submit" class="btn btn-danger btn-xs" name="del" value="{{ item.id }}">Hapus</button>
-				</td>
-			</tr>
-		{% endfor %}
-		</tbody>
-	</table>
-</form>
-
+<div class="table-content">
+	<h3>Stok</h3>
+	<hr>
+	<form method="post">
+		<table class="table table-bordered" id="myTable">
+			<thead>
+				<tr>
+					<th class="tb-no">No</th>
+					<th>Nama Stok</th>
+					<th>Harga</th>
+					<th>Kategori</th>
+					<th>Jumlah Stok</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for item in stok %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{ item.nama }}</td>
+					<td>{{ item.harga }}</td>
+					<td>{{ item.kategori }}</td>
+					<td>{{ item.jumlah_stok }}</td>
+					<td>
+						<a href="{% url 'edit_stok' item.id %}" class="btn btn-primary btn-xs">Edit</a>
+						<button type="submit" class="btn btn-danger btn-xs" name="del" value="{{ item.id }}">Hapus</button>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</form>
+	<div class="clear"></div>
+</div>
 {% endblock content %}
