@@ -48,13 +48,19 @@ def register(request):
 
 def login(request):
 
+	msg = ''
 	if request.method == 'POST':
 		user = Customer.objects.filter(username=request.POST['username'], password=request.POST['password']).values()
-		request.session['id'] = user[0]['id']
 
-		return redirect('home')
+		if user:
+			request.session['id'] = user[0]['id']
+
+			return redirect('home')
+		else:
+			msg = 'alert("Username atau password salah'
+
 	
-	return render(request, 'public/login.html')
+	return render(request, 'public/login.html', {'msg' : msg})
 
 def logout(request):
 	del request.session['id']

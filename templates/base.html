@@ -60,14 +60,37 @@
         </div>
         <div id="data" data-id="#{% block menu %}{% endblock menu %}"></div>
         <div class="contents">{% block content %}{% endblock content %}</div>
+        <div class="modal fade" id="kirim-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kirim Pesanan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="list-pesanan"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <script type="text/javascript" src="{% static '/js/jquery.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/bootstrap/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/dataTables.min.js' %}"></script>
         <script type="text/javascript" src="{% static '/js/main.js' %}"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+
+                var kirimModal = new bootstrap.Modal(document.getElementById('kirim-modal'), {
+                    keyboard: false
+                });
+
                 var add = '{% block tablebtn %}{% endblock %}';
                 $('#myTable_wrapper').prepend(add);
+
+
+                $('.kirim').click(function(){
+                    kirimModal.show();
+                });
             });
         </script>
     </body>
