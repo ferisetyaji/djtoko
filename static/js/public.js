@@ -57,20 +57,6 @@ function countOrder(){
     document.querySelector('#j-pesanan').innerHTML = jmlKeranjang;
 }
 
-        
-$('.tambah-keranjang').click(function(){
-    var data = localStorage.getItem('keranjang') != undefined ? JSON.parse(localStorage.getItem('keranjang')): [];
-    var id = $(this).attr('data-id');
-    data.push(id);
-    data = JSON.stringify(data);
-    localStorage.setItem('keranjang', data);
-    countCart();
-});
-
-
-
-
-
 $(document).on('click', '.plus-cart', function(){
     var data = localStorage.getItem('keranjang') != undefined ? JSON.parse(localStorage.getItem('keranjang')): [];
     var id = $(this).attr('data-id');

@@ -7,8 +7,17 @@ from ..models import Pesanan
 def pesanan(request):
 
 	if request.method == 'POST':
-		del_pesanan = Pesanan.objects.get(id = request.POST['del'])
-		del_pesanan.delete()
+
+		if 'batal' in request.POST:
+			del_pesanan = Pesanan.objects.get(id = request.POST['batal'])
+			del_pesanan.delete()
+
+		if 'kirim' in request.POST:
+			Pesanan.objects.filter(id = request.POST['kirim']).update(status_pesanan = 'pesanan_dikirim')
+
+		if 'terkirim' in request.POST:
+			Pesanan.objects.filter(id = request.POST['terkirim']).update(status_pesanan = 'pesanan_terkirim')
+
 		return redirect('pesanan')
 
 	data_pesanan = Pesanan.objects.all()

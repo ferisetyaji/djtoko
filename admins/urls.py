@@ -22,7 +22,10 @@ urlpatterns = [
 	path('api/tambah_keranjang/', api.tambah_keranjang, name='keranjang'),
 	path('api/get_keranjang/', api.get_keranjang, name='get_keranjang'),
 	path('api/bayar/', api.bayar, name='bayar'),
+	path('api/pesanan/', api.pesanan, name='api_pesanan'),
 	path('api/customer/', api.customer, name='customer'),
+	path('api/selesai/', api.selesai, name='selesai'),
+	path('api/ulasan/', api.ulasan, name='ulasan'),
 ]
 
 if settings.DEBUG:

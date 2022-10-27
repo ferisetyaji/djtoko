@@ -2,61 +2,62 @@
 {% block title %}stok{% endblock %}
 {% block menu %}stok{% endblock %}
 {% block content %}
-
-<h3>{{title}}Stok</h3>
-<hr>
-<form method="post" enctype="multipart/form-data">
-	<div class="row">
-		<div class="col-md-8">
-			<div class="form-group row">
-				<label class="col-md-4">Nama</label>
-				<div class="col-md-8">
-					<input type="text" class="form-control" name="nama" value="{{stok_id.nama}}">
+<div class="table-content">
+	<h3>{{title}}Stok</h3>
+	<hr>
+	<form method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group row">
+					<label class="col-md-4">Nama</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="nama" value="{{stok_id.nama}}">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4">Deskripsi</label>
-				<div class="col-md-8">
-					<textarea class="form-control" name="deskripsi">{{stok_id.deskripsi}}</textarea>
+				<div class="form-group row">
+					<label class="col-md-4">Deskripsi</label>
+					<div class="col-md-8">
+						<textarea class="form-control" name="deskripsi">{{stok_id.deskripsi}}</textarea>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4">Harga</label>
-				<div class="col-md-8">
-					<input type="text" class="form-control" name="harga" value="{{stok_id.harga}}">
+				<div class="form-group row">
+					<label class="col-md-4">Harga</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="harga" value="{{stok_id.harga}}">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4">Kategori</label>
-				<div class="col-md-8">
-					<select class="form-control" name="kategori">
-						<option value="">- Pilih Kategori -</option>
-						{% for item in kategori %}
-						<option>{{item.nama}}</option>
-						{% endfor %}
-					</select>
+				<div class="form-group row">
+					<label class="col-md-4">Kategori</label>
+					<div class="col-md-8">
+						<select class="form-control" name="kategori">
+							<option value="">- Pilih Kategori -</option>
+							{% for item in kategori %}
+							<option>{{item.nama}}</option>
+							{% endfor %}
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4">Jumlah Stok</label>
-				<div class="col-md-8">
-					<input type="number" class="form-control" name="jumlah" value="{{stok_id.jumlah_stok}}">
+				<div class="form-group row">
+					<label class="col-md-4">Jumlah Stok</label>
+					<div class="col-md-8">
+						<input type="number" class="form-control" name="jumlah" value="{{stok_id.jumlah_stok}}">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4">Gambar</label>
-				<div class="col-md-8">
-					<input type="file" class="form-control" name="file">
+				<div class="form-group row">
+					<label class="col-md-4">Gambar</label>
+					<div class="col-md-8">
+						<input type="file" class="form-control" name="file">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-4"></label>
-				<div class="col-md-8">
-					<input type="hidden" name="id" value="{{stok_id.id}}">
-					<button type="submit" class="btn btn-success" name="save" value="1">Simpan</button>
+				<div class="form-group row">
+					<label class="col-md-4"></label>
+					<div class="col-md-8">
+						<input type="hidden" name="id" value="{{stok_id.id}}">
+						<button type="submit" class="btn btn-success" name="save" value="1">Simpan</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 {% endblock %}

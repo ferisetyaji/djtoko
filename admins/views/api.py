@@ -102,14 +102,39 @@ def bayar(request):
 						'gambar' : dt_item.gambar,
 						'tanggal' : dt_item.tanggal,
 						'jumlah' : dt_item.jumlah_stok,
-						'status' : 'pesanan_belum_diproses'
+						'status' : 'pesanan_belum_diproses',
 					})
 
 		item_detail = json.dumps(items, indent=4, sort_keys=True, default=str)
 		data = '{"item":'+item_detail+',"message":"success"}';
 	return HttpResponse(data, content_type="text/json-comment-filtered")
 
-def customer(request):
-	cs = Customer.objects.filter(id = request.session['id']).values()[0]
-	data = json.dumps(cs, indent=4, sort_keys=True, default=str)
+def pesanan(request):
+	data = Pesanan.objects.filter(id_pemesan = request.POST['id']).values()
+	item = []
+	for i in data:
+		item.append(i)
+
+	data = json.dumps(item, indent=4, sort_keys=True, default=str)
+
 	return HttpResponse(data, content_type="text/json-comment-filtered")
+
+def customer(request):
+	if 'id' in request.session:
+		cs = Customer.objects.filter(id = request.session['id']).values()[0]
+		data = json.dumps(cs, indent=4, sort_keys=True, default=str)
+	else:
+		data = '{"msg":"faild"}';
+
+	return HttpResponse(data, content_type="text/json-comment-filtered")
+
+def selesai(request):
+	Pesanan.objects.filter(id = request.POST['id']).update(status_pesanan = 'pesanan_selesai')
+	return
+
+def ulasan(request):
+	Pesanan.objects.filter(id = request.POST['id']).update(
+			rating = request.POST['rating'],
+			komentar = request.POST['komentar']
+		)
+	return HttpResponse('{"result":"success"}', content_type="text/json-comment-filtered")

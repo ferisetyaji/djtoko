@@ -11,20 +11,26 @@
         <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
         <link rel="stylesheet" href="{% static '/css/main.css' %}">
         <link rel="stylesheet" href="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/css/public.css">
-
+        <style type="text/css">
+            .rating{
+                font-size:1.2em;
+                display:inline-block;
+            }
+            .rating-s i{
+                color:orange;
+            }
+        </style>
     </head>
     <body style="background-color:#fff">
         <div class="top-bar">
             <div class="container">
                 <a href="{% url 'home' %}" class="brand">DJTOKO</a>
                 <div class="top-tool">
-                    <a class="tool-menu" id="opsi">
-                        <div><i class="fas fa-user"></i> <span id="top-user-name" style="margin-left: 15px;font-size: 0.9em;">Nama</span></div>
-                    </a>
+                    <a class="tool-menu" id="opsi"><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/default.png" style="height:100%"></a>
                     <a href="" class="tool-menu"><i class="fas fa-heart"></i></a>
                     <a class="tool-menu" id="pesanan"><i class="fas fa-truck"></i> <span id="j-pesanan" style="color:orange">0</span></a>
                     <a class="tool-menu" id="keranjang"><i class="fas fa-shopping-cart"></i> <span id="j-keranjang" style="color:orange">0</span></a>
-                    <input type="text" class="form-search">
+                    <input type="text" class="form-search" placeholder="Cari Produk">
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -33,6 +39,16 @@
         <footer>
             <p class="text-footer">&copy;Copyright <span class="tgl-copy"></span> by SBF Team</p>
         </footer>
+        <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div style="font-size:1.1em;text-align: center;padding:25px 0;">Silahkan login / daftar terlebih dahulu untuk melakukan transaksi.</div>
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary" style="display:block;width:100px;margin:0 auto">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="modal fade" id="keranjang-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -66,7 +82,7 @@
             </div>
           </div>
         </div>
-         <div class="modal fade" id="opsi-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="opsi-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -79,6 +95,30 @@
                 </div>
                 <div class="mb-3 text-center" id="opsi-nama"></div>
                 <a href="{% url 'logout' %}" class="btn btn-primary" style="display:block;width:200px;margin:0 auto">Keluar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="ulasan-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ulasan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                    <span class="rating rating-1" data-id="1"><i class="fas fa-star"></i></span>
+                    <span class="rating rating-2" data-id="2"><i class="fas fa-star"></i></span>
+                    <span class="rating rating-3" data-id="3"><i class="fas fa-star"></i></span>
+                    <span class="rating rating-4" data-id="4"><i class="fas fa-star"></i></span>
+                    <span class="rating rating-5" data-id="5"><i class="fas fa-star"></i></span>
+                    <input type="hidden" id="rating-komentar">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" id="text-komentar" rows="3" placeholder="Komentar"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" id="simpan-komentar" style="float:right">Simpan</button>
               </div>
             </div>
           </div>
@@ -103,9 +143,32 @@
                 keyboard: false
             });
 
+            var ulasanModal = new bootstrap.Modal(document.getElementById('ulasan-modal'), {
+                keyboard: false
+            });
+
+            var loginModal = new bootstrap.Modal(document.getElementById('login-modal'), {
+                keyboard: false
+            });
+
+
+            $('.tambah-keranjang').click(function(){
+                var id_session = '{{request.session.id}}';
+                console.log(id_session);
+                if(id_session == ''){
+                    loginModal.show();
+                    return;
+                }
+                var data = localStorage.getItem('keranjang') != undefined ? JSON.parse(localStorage.getItem('keranjang')): [];
+                var id = $(this).attr('data-id');
+                data.push(id);
+                data = JSON.stringify(data);
+                localStorage.setItem('keranjang', data);
+                countCart();
+            });
+
 
             $('#keranjang').click(function(){
-
                 var keranjang = localStorage.getItem('keranjang');
 
                 $.ajax({
@@ -145,33 +208,51 @@
             });
 
             $('#pesanan').click(function(){
+                var id = localStorage.getItem('id');
+                $.ajax({
+                    url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/admin/api/pesanan/',
+                    type: 'post',
+                    data: {id:id},
+                    success: function(data){
+                        var item = '';
+                        for(var i = 0; i < data.length; i++){
+                            if(data[i].rating <= 0){
+                                var progres = '';
+                                switch(data[i].status_pesanan){
+                                    case 'pesanan_belum_diproses': progres = 10; break;
+                                    case 'pesanan_dikirim': progres = 50; break;
+                                    case 'pesanan_terkirim': progres = 90; break;
+                                }
 
-                var data = JSON.parse(localStorage.getItem('pesanan'));
+                                if(data[i].status_pesanan != 'pesanan_terkirim'){
+                                    progres = '<div>'+data[i].status_pesanan+'</div>\
+                                            <div class="progress">\
+                                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: '+progres+'%" aria-valuenow="'+progres+'" aria-valuemin="0" aria-valuemax="100"></div>\
+                                            </div>';
+                                }else{
+                                    progres = '<button type="button" class="btn btn-warning btn-block selesai" data-id="'+data[i].id+'">Selesai</button>';
+                                }
+                                
+                                progres = data[i].status_pesanan == 'pesanan_selesai' ? '<button type="button" class="btn btn-warning btn-block ulasan" data-id="'+data[i].id+'">Ulasan</button>': progres;
 
-                var item = '';
-                for(var i = 0; i < data.length; i++){
+                                item += '\
+                                <div class="mb-3">\
+                                    <div class="row">\
+                                        <div class="col-7">\
+                                            <div>'+data[i].nama_pemesan+'</div>\
+                                            <div><strong>'+data[i].jumlah+' pcs,</strong> Harga Rp. '+data[i].harga+'</div>\
+                                        </div>\
+                                        <div class="col-5">'+progres+'</div>\
+                                    </div>\
+                                </div><hr>';
+                            }
+                        }
 
-                    item += '\
-                    <div class="mb-3">\
-                        <div class="row">\
-                            <label class="col-7">'+data[i].nama+'</label>\
-                            <div class="col-5" style="text-align:center;">Dalam Pengiriman</div>\
-                        </div>\
-                        <div class="row">\
-                            <div class="col-7"><strong>1 pcs,</strong> Harga Rp. 2000</div>\
-                            <div class="col-5">\
-                                <div class="progress">\
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>\
-                                </div>\
-                            </div>\
-                        </div>\
-                        </div>\
-                    </div><hr>';
-
-                }
-                $('.list-pesanan').html(item);
-                pesananModal.show();
-                countOrder();
+                        item = item == '' ? '<div style="text-align:center">Pesanan Kosong.</div><br>': item;
+                        $('.list-pesanan').html(item);
+                        pesananModal.show();
+                        countOrder();
+                    }});
             });
 
             $('#bayar-sekarang').click(function(){
@@ -206,25 +287,114 @@
                         localStorage.setItem('pesanan', item);
                         countCart();
                         countOrder()
+                        keranjangModal.hide();
+                        pesananModal.show();
                     }
                 });
             });
 
             $.get('{{request.scheme}}://{{request.META.HTTP_HOST}}/admin/api/customer/', function(data){
-                console.log(data);
-                localStorage.setItem('full_name', data.nama_lengkap);
-                localStorage.setItem('user_name', data.username);
-                localStorage.setItem('alamat', data.alamat);
-                localStorage.setItem('id', data.id);
-                localStorage.setItem('email', data.email);
-                localStorage.setItem('telp', data.telp);
-                $('#top-user-name').text(data.username);
+                if(data.msg == 'faild'){
+                    $('.top-tool').html('\
+                        <a href="{% url 'login' %}" class="tool-menu"\
+                            <div>Masuk</div>\
+                        </a>\
+                        <input type="text" class="form-search" placeholder="Cari Produk">');
+                }else{
+                    localStorage.setItem('full_name', data.nama_lengkap);
+                    localStorage.setItem('user_name', data.username);
+                    localStorage.setItem('alamat', data.alamat);
+                    localStorage.setItem('id', data.id);
+                    localStorage.setItem('email', data.email);
+                    localStorage.setItem('telp', data.telp);
+                    $('#top-user-name').text(data.username);
+                }
             });
             $('#opsi').click(function(){
                 $('#opsi-nama').text(localStorage.getItem('user_name'));
                 opsiModal.show();
             });
 
+            $(document).on('click', '.selesai', function(){
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/admin/api/selesai/',
+                    type: 'post',
+                    data: {id:id},
+                    success: function(){
+                        window.location.reload();
+                    }
+                });
+            });
+
+            $(document).on('click', '.ulasan', function(){
+                var id = $(this).attr('data-id');
+                $('#simpan-komentar').attr('data-id', id);
+                ulasanModal.show();
+            });
+
+            $(document).on('click', '.rating', function(){
+                var id = $(this).attr('data-id');
+                $('#rating-komentar').val(id);
+
+                switch(id){
+                    case '1':
+                            $('.rating-1').addClass('rating-s');
+                            $('.rating-2').removeClass('rating-s');
+                            $('.rating-3').removeClass('rating-s');
+                            $('.rating-4').removeClass('rating-s');
+                            $('.rating-5').removeClass('rating-s');
+                        break;
+                    case '2':
+                            $('.rating-1').addClass('rating-s');
+                            $('.rating-2').addClass('rating-s');
+                            $('.rating-3').removeClass('rating-s');
+                            $('.rating-4').removeClass('rating-s');
+                            $('.rating-5').removeClass('rating-s');
+                        break;
+                    case '3':
+                            $('.rating-1').addClass('rating-s');
+                            $('.rating-2').addClass('rating-s');
+                            $('.rating-3').addClass('rating-s');
+                            $('.rating-4').removeClass('rating-s');
+                            $('.rating-5').removeClass('rating-s');
+                        break;
+                    case '4':
+                            $('.rating-1').addClass('rating-s');
+                            $('.rating-2').addClass('rating-s');
+                            $('.rating-3').addClass('rating-s');
+                            $('.rating-4').addClass('rating-s');
+                            $('.rating-5').removeClass('rating-s');
+                        break;
+                    case '5':
+                            $('.rating-1').addClass('rating-s');
+                            $('.rating-2').addClass('rating-s');
+                            $('.rating-3').addClass('rating-s');
+                            $('.rating-4').addClass('rating-s');
+                            $('.rating-5').addClass('rating-s');
+                        break;
+                }
+            });
+
+            $(document).on('click', '#simpan-komentar', function(){
+                var id = $(this).attr('data-id');
+                var rating = $('#rating-komentar').val();
+                var komentar = $('#text-komentar').val();
+
+                $.ajax({
+                    url: '{{request.scheme}}://{{request.META.HTTP_HOST}}/admin/api/ulasan/',
+                    type: 'post',
+                    data: {
+                        id:id,
+                        rating:rating,
+                        komentar:komentar
+                    },
+                    success: function(){
+                        localStorage.removeItem('pesanan');
+                        window.location.reload(); 
+                    }
+                });
+            });
         </script>
     </body>
 </html>

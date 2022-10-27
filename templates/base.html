@@ -80,17 +80,9 @@
         <script type="text/javascript">
             $(document).ready(function(){
 
-                var kirimModal = new bootstrap.Modal(document.getElementById('kirim-modal'), {
-                    keyboard: false
-                });
-
                 var add = '{% block tablebtn %}{% endblock %}';
                 $('#myTable_wrapper').prepend(add);
-
-
-                $('.kirim').click(function(){
-                    kirimModal.show();
-                });
+                
             });
         </script>
     </body>

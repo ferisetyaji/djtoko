@@ -2,32 +2,33 @@
 {% block title %}User{% endblock %}
 {% block menu %}user{% endblock %}
 {% block content %}
-
-<h3>{{title}}User</h3>
-<hr>
-<form method="post">
-	<div class="row">
-		<div class="col-md-8">
-			<div class="form-group row">
-				<label class="col-md-2">Username</label>
-				<div class="col-md-10">
-					<input type="text" class="form-control" name="name" value="{{user_id.username}}">
+<div class="table-content">
+	<h3>{{title}}User</h3>
+	<hr>
+	<form method="post">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group row">
+					<label class="col-md-2">Username</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control" name="name" value="{{user_id.username}}">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-2">Password</label>
-				<div class="col-md-10">
-					<input type="password" class="form-control" name="pass">
+				<div class="form-group row">
+					<label class="col-md-2">Password</label>
+					<div class="col-md-10">
+						<input type="password" class="form-control" name="pass">
+					</div>
 				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-md-2"></label>
-				<div class="col-md-10">
-					<input type="hidden" name="id" value="{{user_id.id}}">
-					<button type="submit" class="btn btn-success" name="save" value="1">Simpan</button>
+				<div class="form-group row">
+					<label class="col-md-2"></label>
+					<div class="col-md-10">
+						<input type="hidden" name="id" value="{{user_id.id}}">
+						<button type="submit" class="btn btn-success" name="save" value="1">Simpan</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 {% endblock %}

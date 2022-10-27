@@ -4,8 +4,8 @@ from admins.models import Stok, Customer
 
 def index(request):
 
-	if 'id' not in request.session:
-		return redirect('login')
+	# if 'id' not in request.session:
+	# 	return redirect('login')
 
 	data = {
 		'stok' : Stok.objects.all()
@@ -32,11 +32,15 @@ def checkout(request):
 def register(request):
 
 	if request.method == 'POST':
+
+		foto = request.POST['foto'] if 'foto' in request.POST else 'default'
+
 		q = Customer.objects.create(
 				username = request.POST['username'],
 				password = request.POST['password'],
 				nama_lengkap = request.POST['nama_lengkap'],
 				email = request.POST['email'],
+				foto = foto,
 				telp = request.POST['telp'],
 				alamat = request.POST['alamat']
 			)

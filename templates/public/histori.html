@@ -1,32 +1,20 @@
-{% extends 'base.html' %}
-{% block title %}stok{% endblock %}
-{% block menu %}Stok{% endblock %}
+{% extends 'base1.html' %}
+{% load humanize %}
+{% block title %}{{stok.nama}}{% endblock %}
 {% block content %}
-<style type="text/css">
-    .rating{
-        font-size:1.2em;
-        display:inline-block;
-    }
-    .rating-s i{
-        color:orange;
-    }
-</style>
-<div class="table-content">
-	<h3>Pesanan</h3>
-	<hr>
-	<form method="post">
-		<table class="table table-bordered" id="myTable">
+
+<div class="container body-content">
+	<table class="table table-bordered" id="myTable">
 			<thead>
 				<tr>
 					<th class="tb-no">No</th>
-					<th>Nama Pemesan</th>
+					<th>Produk</th>
 					<th>Status Pemesanan</th>
 					<th>Jumlah</th>
 					<th>Harga</th>
 					<th>Subtotal</th>
 					<th>Rating</th>
 					<th>ULasan</th>
-					<th>Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,22 +60,9 @@
 	                {% endif %}
 					</td>
 					<td>{{ item.komentar }}</td>
-					<td>
-						{% if item.status_pesanan == 'pesanan_belum_diproses' %}
-						<button type="submit" class="btn btn-primary btn-xs" name="kirim" value="{{ item.id }}" style="margin-right:4px;">Kirim</button>
-						{% elif item.status_pesanan == 'pesanan_dikirim' %}
-						<button type="submit" class="btn btn-primary btn-xs" name="terkirim" value="{{ item.id }}" style="margin-right:4px;">Terkirim</button>
-						{% endif %}
-
-						{% if item.status_pesanan != 'pesanan_selesai' %}
-						<button type="submit" class="btn btn-danger btn-xs" name="batal" value="{{ item.id }}">Batal</button>
-						{% endif %}
-					</td>
 				</tr>
 			{% endfor %}
 			</tbody>
 		</table>
-	</form>
-	<div class="clear"></div>
 </div>
-{% endblock content %}
+{% endblock %}

@@ -21,6 +21,7 @@ class Pesanan(models.Model):
 	id_stok = models.IntegerField()
 	id_pemesan = models.IntegerField()
 	nama_pemesan = models.CharField(max_length=100)
+	nama_produk = models.CharField(max_length=100)
 	telp = models.CharField(max_length=20)
 	email = models.CharField(max_length=50)
 	alamat = models.CharField(max_length=500)
@@ -28,12 +29,15 @@ class Pesanan(models.Model):
 	jumlah = models.IntegerField()
 	harga = models.IntegerField()
 	subtotal= models.IntegerField()
+	rating= models.IntegerField(null=True, default=None, blank=True)
+	komentar= models.TextField(null=True, default=None, blank=True)
 
 class Customer(models.Model):
 	username = models.CharField(max_length=100)
 	password = models.CharField(max_length=100)
 	nama_lengkap = models.CharField(max_length=100)
 	email = models.CharField(max_length=100)
+	foto = models.TextField()
 	telp = models.CharField(max_length=200)
 	alamat = models.TextField()
 	
