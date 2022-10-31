@@ -24,13 +24,15 @@
     <body style="background-color:#fff">
         <div class="top-bar">
             <div class="container">
-                <a href="{% url 'home' %}" class="brand">DJTOKO</a>
-                <div class="top-tool">
-                    <a class="tool-menu" id="opsi"><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/default.png" style="height:100%"></a>
+                
+                <div class="top-tool" style="width: 710px;height: 20px;margin: 0 auto;">
+                    <a class="tool-menu" id="opsi" style="padding-top:1px"><img src="{{request.scheme}}://{{request.META.HTTP_HOST}}/static/img/default.png" style="height:25px"></a>
                     <a href="" class="tool-menu"><i class="fas fa-heart"></i></a>
                     <a class="tool-menu" id="pesanan"><i class="fas fa-truck"></i> <span id="j-pesanan" style="color:orange">0</span></a>
                     <a class="tool-menu" id="keranjang"><i class="fas fa-shopping-cart"></i> <span id="j-keranjang" style="color:orange">0</span></a>
-                    <input type="text" class="form-search" placeholder="Cari Produk">
+                    <input type="text" class="form-search" style="width:329px" placeholder="Cari Produk">
+                    <div class="tool-menu" style="width: 2px;padding:0;background-color: #000;height: 33px;"></div>
+                    <a href="{% url 'home' %}" class="tool-menu" style="font-weight:600">DJTOKO</a>
                 </div>
                 <div class="clearfix"></div>
             </div>

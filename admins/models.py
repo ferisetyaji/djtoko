@@ -40,4 +40,7 @@ class Customer(models.Model):
 	foto = models.TextField()
 	telp = models.CharField(max_length=200)
 	alamat = models.TextField()
-	
+
+class Slide(models.Model):
+	gambar = models.TextField()
+	link = models.TextField()
